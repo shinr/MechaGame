@@ -62,8 +62,7 @@ public class InputHandler : MonoBehaviour {
 			keys[(int)Actions.Boost] = false;
 		}
 		if (Input.GetKeyDown (KeyCode.E)) {
-			weapon = Instantiate(weapon, this.transform.position, this.transform.rotation) as GameObject;
-			weapon.layer = 8;
+			GameObject proj = Instantiate(weapon, this.transform.position, this.transform.rotation) as GameObject;
 		}
 	}
 }
