@@ -17,16 +17,16 @@ public class InputHandler : MonoBehaviour {
 
 	// do movement
 	void FixedUpdate() {
-		if (keys [(int)Actions.Up]) {
+		if (keys [(int)Actions.Up] || Input.GetAxis ("Vertical") > 0.2f ) {
 			this.rigidbody.AddForce (Vector3.up * 10.0f);
 		}
-		if (keys [(int)Actions.Down]) {
+		if (keys [(int)Actions.Down] || Input.GetAxis ("Vertical") < -0.2f) {
 			this.rigidbody.AddForce (Vector3.down * 10.0f);
 		}
-		if (keys [(int)Actions.Left]) {
+		if (keys [(int)Actions.Left] || Input.GetAxis ("Horizontal") < -0.2f) {
 			this.rigidbody.AddForce (Vector3.left * 10.0f);
 		}
-		if (keys [(int)Actions.Right]) {
+		if (keys [(int)Actions.Right] || Input.GetAxis ("Horizontal") > 0.2f) {
 			this.rigidbody.AddForce (Vector3.right * 10.0f);
 		}
 		if (keys [(int)Actions.Boost]) {
