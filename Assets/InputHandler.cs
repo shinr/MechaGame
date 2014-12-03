@@ -7,9 +7,10 @@ public class InputHandler : MonoBehaviour {
 		Down,
 		Left, 
 		Right,
-		Boost
+		Boost,
+		Laser
 	};
-	bool[] keys = {false, false, false, false, false};
+	bool[] keys = {false, false, false, false, false, false};
 	public GameObject weapon;
 	// Use this for initialization
 	void Start () {
@@ -31,6 +32,12 @@ public class InputHandler : MonoBehaviour {
 		}
 		if (keys [(int)Actions.Boost]) {
 			this.rigidbody.AddRelativeForce (Vector3.forward * 50.0f);
+		}
+		if (keys [(int)Actions.Laser]) {
+			if(weapon.GetComponent<Weapon>().canFire) {
+				GameObject proj = Instantiate(weapon, this.transform.position, this.transform.rotation) as GameObject;
+				weapon.GetComponent<Weapon>().Fire ();
+			}
 		}
 	}
 	
@@ -62,7 +69,9 @@ public class InputHandler : MonoBehaviour {
 			keys[(int)Actions.Boost] = false;
 		}
 		if (Input.GetKeyDown (KeyCode.E)) {
-			GameObject proj = Instantiate(weapon, this.transform.position, this.transform.rotation) as GameObject;
+			keys[(int)Actions.Laser] = true;
+		} else if (Input.GetKeyUp (KeyCode.E)) {
+			keys[(int)Actions.Laser] = false;
 		}
 	}
 }

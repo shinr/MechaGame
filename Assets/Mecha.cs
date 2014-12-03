@@ -14,6 +14,9 @@ public class Mecha : MonoBehaviour {
 	}
 
 	void Damage(float damage) {
-
+		this.health -= damage;
+		if (this.health < 0.0f) {
+			Destroy (this.gameObject);
+		}
 	}
 }
