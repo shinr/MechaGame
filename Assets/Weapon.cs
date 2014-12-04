@@ -4,7 +4,8 @@ using System.Collections;
 public class Weapon : MonoBehaviour {
 	public bool canFire = true;
 	public float cooldown = 1.0f;
-	float timer = 0.0f;
+	public GameObject projectile;
+	float timer = 99.0f;
 	// Use this for initialization
 	void Start () {
 	
@@ -26,6 +27,9 @@ public class Weapon : MonoBehaviour {
 	}
 
 	public void Fire() {
-		timer = 0.0f;
+		if (canFire) {
+			timer = 0.0f;
+			Instantiate (projectile, this.transform.position, this.transform.rotation);
+		}
 	}
 }

@@ -11,7 +11,6 @@ public class InputHandler : MonoBehaviour {
 		Laser
 	};
 	bool[] keys = {false, false, false, false, false, false};
-	public GameObject weapon;
 	// Use this for initialization
 	void Start () {
 	}
@@ -34,9 +33,8 @@ public class InputHandler : MonoBehaviour {
 			this.rigidbody.AddRelativeForce (Vector3.forward * 50.0f);
 		}
 		if (keys [(int)Actions.Laser]) {
-			if(weapon.GetComponent<Weapon>().canFire) {
-				GameObject proj = Instantiate(weapon, this.transform.position, this.transform.rotation) as GameObject;
-				weapon.GetComponent<Weapon>().Fire ();
+			if(this.GetComponent<Weapon>().canFire) {
+				this.GetComponent<Weapon>().Fire ();
 			}
 		}
 	}

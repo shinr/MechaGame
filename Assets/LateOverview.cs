@@ -2,10 +2,6 @@
 using System.Collections;
 
 public class LateOverview : MonoBehaviour {
-	public Transform first;
-	public Transform second;
-	Transform begin;
-	Transform end;
 	// Use this for initialization
 	void Start () {
 	
@@ -13,18 +9,11 @@ public class LateOverview : MonoBehaviour {
 
 	void LateUpdate() {
 		Vector3 targetPosition = Vector3.zero;
-		begin = first;
-		end = second;
-		if (begin != null && end != null) {
-			targetPosition = end.position + 0.5f * (begin.position - end.position);
-		} else {
-			if(begin == null) {
-				targetPosition = end.position + 0.5f * (Vector3.zero - end.position);
-			} 
-			if(end == null) {
-				targetPosition = Vector3.zero + 0.5f * (begin.position);
-			}
+		foreach (Transform t in GetComponent<EntityTracker>().trackedEntities) {
+			targetPosition += t.position;
 		}
+		targetPosition /= GetComponent<EntityTracker>().trackedEntities.Length;
+		Debug.DrawLine (Vector3.zero, targetPosition);
 		this.transform.LookAt (targetPosition);
 	}
 
